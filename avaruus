@@ -1,0 +1,50 @@
+package simulaattori;
+
+public class Avaruus {
+    Planeetta pallo = new Planeetta();
+    Planeetta pallot[];
+    Vektorit[] kiihtyvyysvektorit = new Vektorit[2];
+    Vektorit[] siirtymävektorit = new Vektorit[2];
+    Vektorit[] uudetPaikat = new Vektorit[2];
+    int n = 1;
+    double kulma, mass0, r, x, y, vx,vy;
+    double phi, s;
+    
+    
+    public void setup () {
+        pallot = new Planeetta[n];
+        for (int k = 0; k < n; k++) {
+            mass0 = k+5;
+            x = Math.pow(k, 100);
+            y = Math.pow(k, 50);
+            vx = 10;
+            vy = 20;
+            pallot[k] = new Planeetta(mass0, x, y, vx, vy);  
+        }
+    }
+    
+    public void setAlkuarvot(){
+        pallot = new Planeetta[2];
+        pallot[0] = new Planeetta(0, 0, 333000, 0, 0);
+        pallot[1] = new Planeetta(1, 100, 0, 0, 1);  
+    }
+    
+    public void siirräPlaneettoja(){
+        for (int k = 0; k< pallot.length-1; k++){
+            pallot[k].vertaa(pallot[k+1]);
+            kiihtyvyysvektorit[k] = pallot[k].kiihtyvyysV.kiihtyminen(pallot[k].vector,pallot[k].mass);
+            siirtymävektorit[k] = pallot[k].siirtymäV.uSiirtymävektori(pallot[k].kiihtyvyysV, vx,vy);
+            uudetPaikat[k] = pallot[k].vector.summa(siirtymävektorit[k]);
+            pallot[k].päivitäKoordinaatit(uudetPaikat[k]);
+        }
+    }
+    
+    public void haeKoordinaatit(){
+        for (int k = 0; k < pallot.length; k++){
+            System.out.println("koodrinaatit: " + pallot[k].x + ", " + pallot[k].y);
+            System.out.println("kiihtyvyys: " + pallot[k].kiihtyvyysV.x + ", " + pallot[k].kiihtyvyysV.y);
+        }
+    }
+    
+
+}
