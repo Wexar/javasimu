@@ -1,0 +1,17 @@
+package simulaattori;
+
+public class Simulaattori {
+
+    public static void main(String[] args) {
+        
+        Avaruus avaruus = new Avaruus();
+        
+        avaruus.setAlkuarvot();
+        
+        for (int i = 0; i < 5; i++){
+            avaruus.siirräPlaneettoja();
+            avaruus.haeKoordinaatit();
+        }
+    }
+    
+}
