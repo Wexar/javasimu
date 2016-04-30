@@ -1,0 +1,36 @@
+
+package simulatorv2;
+
+public class Controller {
+    
+    Object objects[];
+    float mass, x, y, vx, vy, t;
+    int number, index;
+    int k = 60;
+    
+    public void createList(int number0) {
+        number = number0;
+        objects = new Object[number];
+        System.out.println("Creates list that is " + number + " long.");
+    }
+    
+    public void setInfo (int index0, float mass0, float x0, float y0, float vx0, float vy0) {
+        index = index0;
+        mass = mass0;
+        x = x0;
+        y = y0;
+        vx = vx0;
+        vy = vy0;
+        System.out.println(x + ", " + y);
+        objects[0] = new Object(mass, x, y, vx, vy);
+        //System.out.println(objects[index].location.x + ", " + objects[index].location.y + " setinfo");
+        System.out.println("setInfo");
+    }
+    
+     public void printObjects() {
+        for (Object object: objects) {
+            System.out.println(object.location.x + " printobjects jööö");
+            System.out.println("printobjects");
+        }
+    }
+}
