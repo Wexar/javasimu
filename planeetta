@@ -1,0 +1,75 @@
+package simulaattori;
+import static java.lang.Math.*;
+
+public class Planeetta{
+    Vektorit vector = new Vektorit();
+    Vektorit kiihtyvyysV = new Vektorit();
+    Vektorit siirtymäV = new Vektorit();
+    Vektorit uusiPaikka = new Vektorit();
+    
+    double G = 6.67* Math.pow(10,-11);
+    double x,y,mass, vx, vy;
+    
+    Planeetta() {
+        
+    }
+    
+    Planeetta (double mass0, double x0, double y0, double vx0, double vy0){
+        x = x0;
+        y = y0;
+        mass = mass0;
+        vx = vx0;
+        vy = vy0;  
+    }
+    //vertaa kahta kappaletta toisiinsa ja käy vektorit luokassa laskemassa niiden
+    //välisen gravitaatiovoiman jonka avulla voidaan laskea molemmille kiihtyvyys
+    public void vertaa(Planeetta nextPlanet){
+        double muutosX = x - nextPlanet.x;
+        double muutosY = y - nextPlanet.y;
+        double distance = sqrt(Math.pow(muutosX,2)+Math.pow(muutosY,2));
+        double kulma = (double)(asin(muutosY/distance));
+        vector.voima(kulma, mass, nextPlanet.mass, distance);
+    }//kummalle tässä menee voimavektorin tiedot? voimavektori on kuitenkin 
+        //kahden tietyn kappaleen välinen voima joka on sama molemmilla F=F1=F2
+        //kyseinen voimavektori vallitsee vain näiden kahden tarkastelukappaleen välillä
+    
+    //Seuraavaksi pitäisi tehdä että vektoriluokassa käydään laskemassa halutun 
+    //kappaleen kiihtyvyysvektori jota sitten käytettäisiin kun lasketaan paljonko
+    //kappale siirtyy ja lasketaan uusi paikka
+    //eli 
+    
+    //eka: kutsutaan vektorit luokan kiihtyminen()-metodia
+    //johon viedään kappaleen voimavektori sekä kappaleen massa
+    //-> saadaan ulos kiihtyvyysvektori
+      
+    //toka: kutsutaan vektorit luokan Usiirtymävektori()-metodia
+    //johon viedään halutun kappaleen kiihtyvyys vektori 
+    //ja annettu vauhtivektori(joka kysytään käyttäjältä)
+    //-> saadaan ulos siirtymävektori
+    
+    //kolmanneksi: kutsutaan vektorit luokan summa()-metodia 
+    //jossa käydään laskemassa uusi paikka, viedään kappaleesta saatu siirtymävektori
+    //joka lisätään paikka koordinaatteihin
+    //-> saadaan ulos uusipaikka
+    
+    //Päivitetään uudet paikat olioiden koordinaateiksi
+    
+    public void päivitäKoordinaatit(Vektorit newLocation){
+            x = newLocation.x;
+            y = newLocation.y;
+    }
+    
+    //piirrosta en osaa sanoa nyt vielä mitään :D
+    //mietin myös jos on vain yksi kappale niin miten sen kiertorata muodostuu ympyräksi
+    //näillä laskuilla se menee vain eteenpäin ja liikesuunta muuttuu vain lähellä toista
+    //jos voimavektori on tarpeeksi suuri muuttamaan kiihtyvyysvektoria
+    //pohdin asiaa vielä..
+    
+    //Näin oon käsittäny että maa kiertää aurinkoa vain ja ainoastaan siksi että
+    //niiden välinen gravitaatiovoima vaikuttaa maan kiihtyvyysvektoriin että muodostuu
+    //maan kiertorata. Jos voima pienentyisi saattaisi maa jatkaa matkaa muuhun suuntaa.
+    //Kertokaa mulle jos tiedättä muuta :D :D :D
+
+    
+    
+}
