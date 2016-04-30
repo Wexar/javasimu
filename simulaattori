@@ -1,0 +1,47 @@
+package simulaattori;
+import static java.lang.Math.*;
+
+public class Vektorit {
+    Double G = 6.67* Math.pow(10,-11);
+    final double DEG = PI / 180.0;
+    double x, y;
+    
+    Vektorit(){
+        
+    }
+    Vektorit(double x0, double y0) {
+        x = x0;
+        y = y0;
+    }
+
+    // lasketaan kahden kappaleen vuorovaikutuksesta muodostuva voimavektorin
+    public Vektorit voima(double kulma, double m1, double m2, double distance) {
+              double F = (G*m1*m2)/Math.pow(distance,2); // F1 = F2 = F 
+              x = F *cos(kulma*DEG);
+              y = F *sin(kulma*DEG);
+              Vektorit Fvec = new Vektorit(x,y);
+              return Fvec; //voimavektori on sama molemmille kappaleille m1 ja m2
+    } 
+    //lasketaan kiihtymisvektori voimien vaikutuksesta
+    //vektori kuuluu kappaleelle jonka massaa käyttetään
+    public Vektorit kiihtyminen(Vektorit Fvec, double mass){
+        Vektorit a = new Vektorit(0.0, 0.0);
+        a.x = x/mass;
+        a.y = y/mass;  
+        return a;
+    }
+    // lasketaan siirtymä vektori kappaleelle jonka kiihtyvyys vektoria käytetään
+    //tämän pitäisi pystyä olemaan sekä vauhtia hidasta tai nopeuttava laskutoimitus
+    public Vektorit uSiirtymävektori(Vektorit a, double vx0, double vy0){
+        Vektorit v = new Vektorit(0.0, 0.0);
+        v.x = a.x + vx0;
+        v.y = a.y + vy0;
+        return v;    
+    }
+    // uusi paikka kappaleelle jonka v vektoria käytetään
+    public Vektorit summa(Vektorit v){
+        return new Vektorit(x + v.x, y + v.y);
+    }
+    
+
+}
